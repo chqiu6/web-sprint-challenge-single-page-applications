@@ -1,16 +1,17 @@
 import React,{useState} from "react";
 import axios from "axios";
 import * as yup from "yup";
+import {Link} from "react-router-dom";
 
 const formSchema = yup.object().shape({
-    name: yup.
-    string()
+    name: yup
+    .string()
     .min(2, "Atleast 2 chars")
     .required("Input name"),
 
     size : yup
-    .string()
-    .required("Select size"),
+    .string(),
+    
 
     pepperoni: yup.boolean(),
     pineapple: yup.boolean(),
@@ -60,8 +61,20 @@ const Form = props => {
 
     const formSubmit = e => {
         e.preventDefault();
+        console.log("pizza form data: ", pizza);
+        axios
+        .post("https://reqres.in/api/users", pizza)
+        .then(res => {
+            props.addNewOrder(res.data)
+        })
+        .catch(err => {
+            console.log("axios error data :", err);
+        })
     }
     return(
+        <div className = "form-list">
+        <Link to = "/">Home </Link>
+
         <form onSubmit = {formSubmit}>
             <label htmlFor = "name">Name</label>
             <input 
@@ -70,12 +83,20 @@ const Form = props => {
             value = {pizza.name}
             onChange = {changeHandler}
             />
+            {errors.name.length > 0 ? (
+            <p className = "error">{errors.name}</p>)
+             : null}
 
             <label htmlFor = "size">Size</label>
-            <select id = "size" name = "size" value = {pizza.size} onChange ={changeHandler}>
-                <option value ="">Select size</option>
+            <select  name = "size" value = {pizza.size} onChange ={changeHandler} >
+                <option value = "">Select Pizza Size</option>
                 <option value = "small">Small</option>
+                <option value = "medium">Medium</option>
+                <option value = "large">Large</option>
             </select>
+            {errors.name.length > 0 ? (
+            <p className = "error">{errors.size}</p>)
+             : null}
 
             <h1>Topping</h1>
             <label htmlFor = "pepperoni">Pepperoni</label>
@@ -83,6 +104,7 @@ const Form = props => {
             type = "checkbox"
             name = "pepperoni"
             checked = {pizza.pepperoni}
+            // value = "pepperoni"
             onChange = {changeHandler}
             />
 
@@ -103,6 +125,7 @@ const Form = props => {
             />
             <button>Add New Order</button>
         </form>
+        </div>
     )
 }
 
