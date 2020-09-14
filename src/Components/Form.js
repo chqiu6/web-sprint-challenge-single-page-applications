@@ -15,6 +15,8 @@ const formSchema = yup.object().shape({
 
     pepperoni: yup.boolean(),
     pineapple: yup.boolean(),
+    bacon: yup.boolean(),
+    chicken: yup.boolean(),
 
     specialInstruction: yup
     .string()
@@ -23,9 +25,11 @@ const formSchema = yup.object().shape({
 const Form = props => {
     const [pizza, setPizzas] = useState({
         name: "",
-        size: "",
+        size: "Small",
         pepperoni: false,
         pineapple: false,
+        bacon: false,
+        chicken: false,
         specialInstruction: ""
     });
 
@@ -82,21 +86,22 @@ const Form = props => {
             name =  "name"
             value = {pizza.name}
             onChange = {changeHandler}
+            data-cy = "name"
             />
             {errors.name.length > 0 ? (
             <p className = "error">{errors.name}</p>)
              : null}
 
             <label htmlFor = "size">Size</label>
-            <select  name = "size" value = {pizza.size} onChange ={changeHandler} >
-                <option value = "">Select Pizza Size</option>
-                <option value = "small">Small</option>
-                <option value = "medium">Medium</option>
-                <option value = "large">Large</option>
+            <select  name = "size" value = {pizza.size} onChange ={changeHandler} data-cy = "size" >
+                <option value = "Small">Small</option>
+                <option value = "Medium">Medium</option>
+                <option value = "Large">Large</option>
             </select>
             {errors.name.length > 0 ? (
             <p className = "error">{errors.size}</p>)
              : null}
+             
 
             <h1>Topping</h1>
             <label htmlFor = "pepperoni">Pepperoni</label>
@@ -106,6 +111,7 @@ const Form = props => {
             checked = {pizza.pepperoni}
             // value = "pepperoni"
             onChange = {changeHandler}
+            data-cy = "pepperoni"
             />
 
             <label htmlFor = "pineapple">Pineapple</label>
@@ -113,17 +119,40 @@ const Form = props => {
             type = "checkbox"
             name = "pineapple"
             checked = {pizza.pineapple}
+            // value = "pineapple"
             onChange = {changeHandler}
+            data-cy = "pineapple"
+            />
+
+            <label htmlFor = "bacon">Bacon</label>
+            <input 
+            type = "checkbox"
+            name = "bacon"
+            checked = {pizza.bacon}
+            // value = "bacon"
+            onChange = {changeHandler}
+            data-cy = "bacon"
+            />
+
+            <label htmlFor = "chicken">Chicken</label>
+            <input 
+            type = "checkbox"
+            name = "chicken"
+            checked = {pizza.chicken}
+            //value = "chicken"
+            onChange = {changeHandler}
+            data-cy = "chicken"
             />
 
             <label htmlFor = "specialInstruction">Special Instruction</label>
-            <input 
+            <textarea 
             type = "textarea"
             name = "specialInstruction"
             value = {pizza.specialInstruction}
             onChange = {changeHandler}
+            data-cy = "specialInstructions"
             />
-            <button>Add New Order</button>
+            <button data-cy = "button" type = "button">Add New Order</button>
         </form>
         </div>
     )
