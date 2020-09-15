@@ -17,10 +17,10 @@ const PizzaList = props => {
                     <h2>Size: {pizzaOrder.size}</h2>
                     <div className = "order-topping">
                     <h1>Toppings</h1>
-                    <p>{pizzaOrder.pepperoni === true ? "Pepperoni": null}</p>
-                    <p>{pizzaOrder.pineapple === true ? "Pineapple" : null}</p>
-                    <p>{pizzaOrder.bacon === true ? "Bacon" : null}</p>
-                    <p>{pizzaOrder.chicken === true ? "Chicken" : null}</p>
+                    <p>{pizzaOrder.pepperoni }</p>
+                    <p>{pizzaOrder.pineapple}</p>
+                    <p>{pizzaOrder.bacon }</p>
+                    <p>{pizzaOrder.chicken }</p>
                     </div>
                     <h2>Special Instructions: {pizzaOrder.specialInstruction}</h2>
                 </div>

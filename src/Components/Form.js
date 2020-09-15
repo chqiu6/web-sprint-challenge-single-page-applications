@@ -152,7 +152,7 @@ const Form = props => {
             onChange = {changeHandler}
             data-cy = "specialInstructions"
             />
-            <button data-cy = "button" type = "button">Add New Order</button>
+            <button >Add New Order</button>
         </form>
         </div>
     )
